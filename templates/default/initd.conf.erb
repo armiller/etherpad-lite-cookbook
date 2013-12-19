@@ -8,12 +8,12 @@
 # Default-Stop: 0 1 6# Description: Start the program
 ### END INIT INFO
 
-START_CMD="<%= @project_path %>/bin/run.sh > <%= @access_log %> 2>&1 &"
-NAME="<%= @user %>"
-PGREP_STRING="<%= @project_path %>/bin/run.sh"
-PGREP_NODE_STRING="node <%= @project_path %>/node_modules/ep_etherpad-lite/node/server.js"
+START_CMD="<%= @etherpad_installation_dir %>/bin/run.sh > <%= @etherpad_access_log %> 2>&1 &"
+NAME="<%= @etherpad_service_user %>"
+PGREP_STRING="<%= @etherpad_installation_dir %>/bin/run.sh"
+PGREP_NODE_STRING="node <%= @etherpad_installation_dir %>/node_modules/ep_etherpad-lite/node/server.js"
 PID_FILE="/var/run/etherpad/etherpad-dev.pid"
-USER="<%= @user %>"
+USER="<%= @etherpad_service_user %>"
 
 ### No further muckin' about needed!
 
