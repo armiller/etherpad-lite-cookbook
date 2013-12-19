@@ -35,10 +35,17 @@ group = node['etherpad-lite']['service_user_gid']
 user_home = node['etherpad-lite']['service_user_home']
 project_path = "#{user_home}/etherpad-lite"
 
+directory user_home do
+  owner user
+  group group
+  mode "0755"
+  action :create
+end
+
+
 user node['etherpad-lite']['service_user'] do
     home user_home
     shell "/bin/bash"
-    supports :manage_home => true
     action :create
 end
 
