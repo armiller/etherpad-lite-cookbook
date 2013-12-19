@@ -114,7 +114,7 @@ when "ubuntu","debian"
     end
 when "centos","rhel"
     # init.d service config file
-    template "/etc/init/" + node['etherpad-lite']['service_name'] do
+    template "/etc/init.d/" + node['etherpad-lite']['service_name'] do
         source "initd.conf.erb"
         variables({
           :etherpad_installation_dir => project_path,
