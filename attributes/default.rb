@@ -34,7 +34,9 @@ default['etherpad-lite']['admin_enabled'] = false
 default['etherpad-lite']['admin_password'] = ""
 default['etherpad-lite']['log_level'] = "INFO"
 
-default['etherpad-lite']['service_user'] = "etherpad"
+service_user = "etherpad-user"
+
+default['etherpad-lite']['service_user'] = service_user
 default['etherpad-lite']['service_user_gid'] = 500
 default['etherpad-lite']['service_user_home'] = "/home/#{service_user}"
 default['etherpad-lite']['service_name'] = "etherpad"
