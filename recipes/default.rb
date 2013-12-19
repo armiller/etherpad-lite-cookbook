@@ -116,6 +116,7 @@ when "centos","rhel"
     # init.d service config file
     template "/etc/init.d/" + node['etherpad-lite']['service_name'] do
         source "initd.conf.erb"
+        mode 0755
         variables({
           :etherpad_installation_dir => project_path,
           :etherpad_service_user => user,
