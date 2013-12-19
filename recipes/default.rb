@@ -200,6 +200,5 @@ end
 
 # Register capture app as a service
 service node['etherpad-lite']['service_name'] do
-  provider Chef::Provider::Service::Upstart
   action :start
 end
