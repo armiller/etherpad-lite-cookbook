@@ -30,14 +30,15 @@ packages.each do |p|
   package p
 end
 
-node.set['nodejs']['install_method'] = 'package'
-include_recipe "nodejs"
-
-
 user = node['etherpad-lite']['service_user']
 group = node['etherpad-lite']['service_user_gid']
 user_home = node['etherpad-lite']['service_user_home']
 project_path = "#{user_home}/etherpad-lite"
+
+user node['etherpad-lite']['service_user'] do
+    home user_home
+    shell "/bin/bash"
+end
 
 git project_path do
   repository node['etherpad-lite']['etherpad_git_repo_url']
@@ -46,8 +47,8 @@ git project_path do
 end
 
 template "#{project_path}/settings.json" do
-  owner user
-  group group
+  owner node['etherpad-lite']['service_user']
+  group node['etherpad-lite']['service_user_git']
   variables({
     :title => node['etherpad-lite']['title'],
     :favicon_url => node['etherpad-lite']['favicon_url'],
