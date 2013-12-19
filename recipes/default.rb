@@ -38,6 +38,7 @@ project_path = "#{user_home}/etherpad-lite"
 user node['etherpad-lite']['service_user'] do
     home user_home
     shell "/bin/bash"
+    supports :manage_home
     action :create
 end
 
