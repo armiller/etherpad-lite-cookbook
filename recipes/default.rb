@@ -43,7 +43,7 @@ end
 
 git project_path do
   repository node['etherpad-lite']['etherpad_git_repo_url']
-  action :sync
+  action :checkout
   user user
 end
 
