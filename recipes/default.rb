@@ -98,17 +98,31 @@ log_dir = node['etherpad-lite']['logs_dir']
 access_log = log_dir + '/access.log'
 error_log = log_dir + '/error.log'
 
-# Upstart service config file
-template "/etc/init/" + node['etherpad-lite']['service_name'] + ".conf" do
-    source "upstart.conf.erb"
-    owner user
-    group group
-    variables({
-      :etherpad_installation_dir => project_path,
-      :etherpad_service_user => user,
-      :etherpad_access_log => access_log,
-      :etherpad_error_log => error_log,
-    })
+case node['platform_family']
+when "ubuntu","debian"
+    # Upstart service config file
+    template "/etc/init/" + node['etherpad-lite']['service_name'] + ".conf" do
+        source "upstart.conf.erb"
+        owner user
+        group group
+        variables({
+          :etherpad_installation_dir => project_path,
+          :etherpad_service_user => user,
+          :etherpad_access_log => access_log,
+          :etherpad_error_log => error_log,
+        })
+    end
+when "centos","rhel"
+    # init.d service config file
+    template "/etc/init/" + node['etherpad-lite']['service_name'] do
+        source "initd.conf.erb"
+        variables({
+          :etherpad_installation_dir => project_path,
+          :etherpad_service_user => user,
+          :etherpad_access_log => access_log,
+          :etherpad_error_log => error_log,
+        })
+    end
 end
 
 # Nginx config file
